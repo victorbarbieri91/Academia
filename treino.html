@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover">
 <title>Treino Full Body — A & B</title>
 <style>
   :root{
@@ -20,58 +20,113 @@
     --tag-pol:#3d2e5c;
     --tag-liv:#5c3d2e;
   }
-  *{box-sizing:border-box}
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html{scroll-behavior:auto}
   html,body{margin:0;padding:0;background:var(--bg);color:var(--txt);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;-webkit-font-smoothing:antialiased}
-  body{padding:16px;max-width:780px;margin:0 auto;padding-bottom:80px}
-  header h1{margin:0 0 4px 0;font-size:24px;letter-spacing:-0.3px}
-  header p.sub{margin:0;color:var(--muted);font-size:14px}
+  body{padding:14px;max-width:780px;margin:0 auto;padding-bottom:120px}
+  header h1{margin:0 0 4px 0;font-size:22px;letter-spacing:-0.3px}
+  header p.sub{margin:0;color:var(--muted);font-size:13px}
 
-  .alert{background:linear-gradient(135deg,#3a2418,#4a2a1a);border:1px solid #6b3a20;border-radius:12px;padding:14px 16px;margin:16px 0;display:flex;gap:12px;align-items:flex-start}
-  .alert .ico{font-size:22px;line-height:1}
-  .alert h3{margin:0 0 4px 0;font-size:15px;color:var(--warn)}
-  .alert p{margin:0;font-size:13px;line-height:1.5;color:#e8d4bc}
+  .alert{background:linear-gradient(135deg,#3a2418,#4a2a1a);border:1px solid #6b3a20;border-radius:12px;padding:12px 14px;margin:14px 0;display:flex;gap:10px;align-items:flex-start}
+  .alert .ico{font-size:20px;line-height:1}
+  .alert h3{margin:0 0 4px 0;font-size:14px;color:var(--warn)}
+  .alert p{margin:0;font-size:12px;line-height:1.5;color:#e8d4bc}
 
-  .tabs{display:flex;gap:8px;margin:16px 0;background:var(--card);padding:6px;border-radius:12px;border:1px solid var(--line);position:sticky;top:8px;z-index:10;backdrop-filter:blur(8px)}
-  .tabs button{flex:1;background:transparent;color:var(--muted);border:none;padding:10px 12px;font-size:14px;font-weight:600;border-radius:8px;cursor:pointer;transition:all .15s}
+  /* Session bar */
+  .session-bar{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px;margin:14px 0;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+  .session-bar .date{font-size:13px;color:var(--muted);flex:1}
+  .session-bar .date strong{color:var(--txt);font-size:14px;font-weight:600}
+  .toolbar{display:flex;gap:6px;flex-wrap:wrap}
+  .btn{background:var(--card-hi);color:var(--txt);border:1px solid var(--line);padding:8px 12px;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;transition:all .15s;font-family:inherit}
+  .btn:hover{background:var(--accent);color:#0a1218;border-color:var(--accent)}
+  .btn:active{transform:scale(0.97)}
+  .btn.primary{background:var(--accent);color:#0a1218;border-color:var(--accent)}
+  .btn.primary:hover{background:#6fd0ff}
+  .btn.danger{color:var(--danger)}
+  .btn.danger:hover{background:var(--danger);color:#fff;border-color:var(--danger)}
+
+  /* Tabs */
+  .tabs{display:flex;gap:6px;margin:12px 0;background:var(--card);padding:5px;border-radius:12px;border:1px solid var(--line);position:sticky;top:6px;z-index:10}
+  .tabs button{flex:1;background:transparent;color:var(--muted);border:none;padding:10px 12px;font-size:14px;font-weight:600;border-radius:8px;cursor:pointer;font-family:inherit}
   .tabs button.active{background:var(--accent);color:#0a1218}
-  .tabs button:not(.active):hover{background:var(--card-hi);color:var(--txt)}
 
   .pane{display:none}
   .pane.active{display:block}
 
-  .section-title{font-size:13px;text-transform:uppercase;letter-spacing:1.2px;color:var(--muted);margin:20px 0 8px 0;padding-left:4px}
+  .section-title{font-size:12px;text-transform:uppercase;letter-spacing:1.2px;color:var(--muted);margin:18px 0 8px 0;padding-left:4px}
 
-  .ex{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;margin-bottom:10px;transition:border-color .15s}
-  .ex:hover{border-color:var(--accent)}
+  /* Exercise card */
+  .ex{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px;margin-bottom:10px}
   .ex.warn{border-left:4px solid var(--warn)}
 
-  .ex-head{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:8px}
-  .ex-name{display:flex;align-items:center;gap:8px;font-size:16px;font-weight:600;flex:1}
-  .ex-num{background:var(--card-hi);color:var(--muted);width:26px;height:26px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0}
+  .ex-head{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:6px}
+  .ex-name{display:flex;align-items:center;gap:8px;font-size:15px;font-weight:600;flex:1}
+  .ex-num{background:var(--card-hi);color:var(--muted);width:24px;height:24px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0}
   .ex.warn .ex-num{background:var(--warn);color:#1a1208}
 
-  .tag{font-size:10px;text-transform:uppercase;letter-spacing:0.8px;padding:3px 8px;border-radius:999px;font-weight:700;white-space:nowrap}
+  .tag{font-size:10px;text-transform:uppercase;letter-spacing:0.8px;padding:3px 7px;border-radius:999px;font-weight:700;white-space:nowrap}
   .tag.maquina{background:var(--tag-maq);color:#9ecbff}
   .tag.polia{background:var(--tag-pol);color:#c8a8ff}
   .tag.livre{background:var(--tag-liv);color:#ffbd8c}
 
-  .sets{font-size:14px;color:var(--accent-2);font-weight:600;margin-bottom:6px}
-  .desc{font-size:13px;color:var(--muted);line-height:1.5;margin-bottom:10px}
+  .sets{font-size:13px;color:var(--accent-2);font-weight:600;margin-bottom:4px}
+  .desc{font-size:12px;color:var(--muted);line-height:1.5;margin-bottom:8px}
   .desc strong{color:#cbd5e0}
-  .note-warn{font-size:12px;color:var(--warn);background:rgba(255,183,77,.08);border-left:3px solid var(--warn);padding:6px 10px;border-radius:4px;margin-bottom:10px}
+  .note-warn{font-size:11px;color:var(--warn);background:rgba(255,183,77,.08);border-left:3px solid var(--warn);padding:6px 10px;border-radius:4px;margin-bottom:8px}
 
+  /* Histórico inline */
+  .hist-info{font-size:11px;color:var(--muted);background:rgba(79,195,247,.06);border:1px solid rgba(79,195,247,.15);padding:6px 10px;border-radius:6px;margin-bottom:8px;display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+  .hist-info b{color:var(--accent)}
+
+  /* Form de log inline */
+  .log-form{display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:6px;margin-bottom:8px}
+  .log-form input{background:var(--card-hi);border:1px solid var(--line);color:var(--txt);padding:9px 8px;border-radius:8px;font-size:14px;width:100%;font-family:inherit;font-weight:600;text-align:center;-moz-appearance:textfield}
+  .log-form input::-webkit-outer-spin-button,.log-form input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+  .log-form input:focus{outline:none;border-color:var(--accent);background:var(--card)}
+  .log-form input::placeholder{color:var(--muted);font-weight:400;font-size:11px}
+  .log-form .btn-save{padding:0 14px;background:var(--accent-2);color:#0a1218;border:none;border-radius:8px;font-weight:700;cursor:pointer;font-size:14px;font-family:inherit}
+  .log-form .btn-save:active{transform:scale(0.96)}
+  .log-form .btn-save:disabled{background:var(--card-hi);color:var(--muted);cursor:not-allowed}
+
+  /* Lista de séries feitas */
+  .series-list{margin-bottom:8px}
+  .series-list .empty{font-size:11px;color:var(--muted);font-style:italic;padding:4px 0}
+  .serie-row{display:flex;align-items:center;gap:8px;padding:5px 8px;background:rgba(129,199,132,.08);border-left:3px solid var(--accent-2);border-radius:4px;font-size:12px;margin-bottom:3px}
+  .serie-row .num{color:var(--accent-2);font-weight:700;min-width:18px}
+  .serie-row .vals{flex:1;color:var(--txt)}
+  .serie-row .rpe{color:var(--muted);font-size:11px}
+  .serie-row .del{background:none;border:none;color:var(--muted);cursor:pointer;padding:2px 6px;font-size:14px;border-radius:4px}
+  .serie-row .del:hover{color:var(--danger);background:rgba(239,83,80,.1)}
+
+  /* Links de vídeo/imagem */
   .links{display:flex;gap:6px;flex-wrap:wrap}
-  .links a{flex:1;min-width:0;text-align:center;text-decoration:none;background:var(--card-hi);color:var(--txt);padding:8px 10px;border-radius:8px;font-size:12px;font-weight:600;border:1px solid var(--line);transition:all .15s;display:inline-flex;align-items:center;justify-content:center;gap:6px}
-  .links a:hover{background:var(--accent);color:#0a1218;border-color:var(--accent)}
-  .links a.yt:hover{background:#e53935;color:#fff;border-color:#e53935}
+  .links a{flex:1;min-width:0;text-align:center;text-decoration:none;background:var(--card-hi);color:var(--txt);padding:7px 10px;border-radius:8px;font-size:11px;font-weight:600;border:1px solid var(--line);display:inline-flex;align-items:center;justify-content:center;gap:6px}
+  .links a:active{background:var(--accent);color:#0a1218}
 
-  footer{text-align:center;color:var(--muted);font-size:12px;margin-top:24px;padding-top:16px;border-top:1px solid var(--line)}
+  /* Modal */
+  .modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.7);display:none;z-index:100;align-items:center;justify-content:center;padding:16px}
+  .modal-bg.open{display:flex}
+  .modal{background:var(--card);border:1px solid var(--line);border-radius:14px;max-width:600px;width:100%;max-height:85vh;overflow-y:auto;padding:18px}
+  .modal h2{margin:0 0 12px 0;font-size:18px}
+  .modal table{width:100%;border-collapse:collapse;font-size:12px}
+  .modal th,.modal td{padding:6px 8px;text-align:left;border-bottom:1px solid var(--line)}
+  .modal th{color:var(--muted);font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.5px}
+  .modal-close{position:sticky;top:0;text-align:right;margin-bottom:8px}
+
+  /* Toast */
+  .toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--accent-2);color:#0a1218;padding:10px 18px;border-radius:999px;font-weight:600;font-size:13px;box-shadow:0 4px 12px rgba(0,0,0,.4);z-index:200;opacity:0;transition:opacity .2s,transform .2s;pointer-events:none}
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+  .toast.err{background:var(--danger);color:#fff}
+
+  footer{text-align:center;color:var(--muted);font-size:11px;margin-top:24px;padding-top:16px;border-top:1px solid var(--line)}
   footer code{background:var(--card);padding:2px 6px;border-radius:4px;color:var(--accent)}
 
   @media (max-width:480px){
-    body{padding:12px;padding-bottom:60px}
-    header h1{font-size:20px}
-    .ex-name{font-size:15px}
+    body{padding:10px;padding-bottom:80px}
+    header h1{font-size:19px}
+    .ex-name{font-size:14px}
+    .session-bar{padding:8px}
+    .btn{padding:7px 10px;font-size:11px}
   }
 </style>
 </head>
@@ -79,14 +134,24 @@
 
 <header>
   <h1>🏋️ Treino Full Body</h1>
-  <p class="sub">Treino A (Posterior) e Treino B (Anterior) — alternar entre os dias</p>
+  <p class="sub">Treino A (Posterior) e B (Anterior) — registro automático</p>
 </header>
 
 <div class="alert">
   <div class="ico">⚠️</div>
   <div>
     <h3>Retorno de lesão — Posterior de coxa</h3>
-    <p>Carga <strong>leve a moderada</strong> nos posteriores. Foco em <strong>controle excêntrico (3-4s na descida)</strong>, amplitude sem dor, e parar 1-2 reps antes da falha. Aquecer 5 min em bike/esteira antes. Se sentir desconforto agudo, interrompa o exercício.</p>
+    <p>Carga <strong>leve a moderada</strong> nos posteriores. Controle excêntrico (3-4s na descida), amplitude sem dor, parar 1-2 reps antes da falha. Aquecer 5min antes.</p>
+  </div>
+</div>
+
+<div class="session-bar">
+  <div class="date">📅 <strong id="todayLabel">—</strong></div>
+  <div class="toolbar">
+    <button class="btn" id="btnHist">📊 Histórico</button>
+    <button class="btn primary" id="btnExport">⬇ Excel</button>
+    <button class="btn" id="btnImport">⬆ Importar</button>
+    <input type="file" id="fileImport" accept=".xlsx,.xls" style="display:none">
   </div>
 </div>
 
@@ -95,341 +160,544 @@
   <button data-pane="b">Treino B — Anterior</button>
 </div>
 
-<!-- ====================== TREINO A ====================== -->
-<section id="pane-a" class="pane active">
-
-  <div class="section-title">🔥 Aquecimento</div>
-  <div class="ex">
-    <div class="ex-head">
-      <div class="ex-name"><span class="ex-num">0</span> Aeróbico leve</div>
-    </div>
-    <div class="sets">5–8 min</div>
-    <div class="desc">Bike ergométrica ou esteira em ritmo leve. Foco em elevar a frequência cardíaca e aquecer articulações.</div>
-  </div>
-
-  <div class="section-title">🟦 Costas</div>
-
-  <div class="ex">
-    <div class="ex-head">
-      <div class="ex-name"><span class="ex-num">1</span> Puxada Alta (Pulldown)</div>
-      <span class="tag maquina">Máquina</span>
-    </div>
-    <div class="sets">4 × 10–12 reps</div>
-    <div class="desc">Máquina com barra ou pegador, sentado, banco com apoio para coxas. Puxa a barra até a altura do peito. <strong>Pegada pronada, aberta</strong>.</div>
-    <div class="links">
-      <a class="yt" target="_blank" rel="noopener" href="https://www.youtube.com/results?search_query=puxada+alta+pulldown+m%C3%A1quina+execu%C3%A7%C3%A3o">▶ Vídeo</a>
-      <a target="_blank" rel="noopener" href="https://www.google.com/search?tbm=isch&q=lat+pulldown+machine+gym">🖼 Imagem</a>
-    </div>
-  </div>
-
-  <div class="ex">
-    <div class="ex-head">
-      <div class="ex-name"><span class="ex-num">2</span> Remada Sentada (Cabo)</div>
-      <span class="tag polia">Polia</span>
-    </div>
-    <div class="sets">3 × 12 reps</div>
-    <div class="desc">Máquina de polia baixa com triângulo (pegador V). Sentado, pés apoiados, costas eretas, puxa o cabo até o abdome <strong>juntando as escápulas</strong>.</div>
-    <div class="links">
-      <a class="yt" target="_blank" rel="noopener" href="https://www.youtube.com/results?search_query=remada+sentada+m%C3%A1quina+cabo+execu%C3%A7%C3%A3o">▶ Vídeo</a>
-      <a target="_blank" rel="noopener" href="https://www.google.com/search?tbm=isch&q=seated+cable+row+machine">🖼 Imagem</a>
-    </div>
-  </div>
-
-  <div class="ex">
-    <div class="ex-head">
-      <div class="ex-name"><span class="ex-num">3</span> Remada Máquina (Articulada)</div>
-      <span class="tag maquina">Máquina</span>
-    </div>
-    <div class="sets">3 × 10 reps</div>
-    <div class="desc">Máquina de remada com apoio para o peito (chest-supported row). Pegada neutra ou pronada. Excelente para isolar dorsais sem sobrecarga lombar.</div>
-    <div class="links">
-      <a class="yt" target="_blank" rel="noopener" href="https://www.youtube.com/results?search_query=remada+m%C3%A1quina+chest+supported+row">▶ Vídeo</a>
-      <a target="_blank" rel="noopener" href="https://www.google.com/search?tbm=isch&q=chest+supported+row+machine">🖼 Imagem</a>
-    </div>
-  </div>
-
-  <div class="ex">
-    <div class="ex-head">
-      <div class="ex-name"><span class="ex-num">4</span> Pulldown Braço Estendido</div>
-      <span class="tag polia">Polia</span>
-    </div>
-    <div class="sets">3 × 15 reps</div>
-    <div class="desc">Polia alta com barra reta. Em pé, braços estendidos, "empurra" a barra pra baixo até a coxa só com força do dorsal. Pouca carga, isolamento.</div>
-    <div class="links">
-      <a class="yt" target="_blank" rel="noopener" href="https://www.youtube.com/results?search_query=pulldown+bra%C3%A7o+estendido+straight+arm+pulldown">▶ Vídeo</a>
-      <a target="_blank" rel="noopener" href="https://www.google.com/search?tbm=isch&q=straight+arm+pulldown">🖼 Imagem</a>
-    </div>
-  </div>
-
-  <div class="section-title">🟧 Posterior de Coxa & Glúteo <span style="color:var(--warn);font-size:11px">— atenção lesão</span></div>
-
-  <div class="ex warn">
-    <div class="ex-head">
-      <div class="ex-name"><span class="ex-num">5</span> Mesa Flexora (Deitada)</div>
-      <span class="tag maquina">Máquina</span>
-    </div>
-    <div class="sets">3 × 15 reps — carga leve</div>
-    <div class="desc">Máquina onde você fica deitado de bruços e flexiona os joelhos puxando o rolo até o glúteo. Ajusta o rolo logo acima do tendão de Aquiles.</div>
-    <div class="note-warn">⚠ Comece com 30–50% da carga habitual. Faça <strong>3s na descida (excêntrica)</strong>. Sem rebote. Pare se houver fisgada.</div>
-    <div class="links">
-      <a class="yt" target="_blank" rel="noopener" href="https://www.youtube.com/results?search_query=mesa+flexora+lying+leg+curl+execu%C3%A7%C3%A3o">▶ Vídeo</a>
-      <a target="_blank" rel="noopener" href="https://www.google.com/search?tbm=isch&q=lying+leg+curl+machine">🖼 Imagem</a>
-    </div>
-  </div>
-
-  <div class="ex warn">
-    <div class="ex-head">
-      <div class="ex-name"><span class="ex-num">6</span> Cadeira Flexora Sentada (Unilateral)</div>
-      <span class="tag maquina">Máquina</span>
-    </div>
-    <div class="sets">3 × 12 reps (cada perna)</div>
-    <div class="desc">Versão sentada da flexora. Faça <strong>unilateral</strong> (uma perna por vez) — ajuda a corrigir assimetria de força entre perna lesionada e sadia.</div>
-    <div class="note-warn">⚠ Carga muito leve. Foco em sentir a contração, não em peso. 3s na descida.</div>
-    <div class="links">
-      <a class="yt" target="_blank" rel="noopener" href="https://www.youtube.com/results?search_query=cadeira+flexora+sentada+unilateral">▶ Vídeo</a>
-      <a target="_blank" rel="noopener" href="https://www.google.com/search?tbm=isch&q=seated+leg+curl+machine">🖼 Imagem</a>
-    </div>
-  </div>
-
-  <div class="ex">
-    <div class="ex-head">
-      <div class="ex-name"><span class="ex-num">7</span> Elevação Pélvica Máquina (Glute Drive)</div>
-      <span class="tag maquina">Máquina</span>
-    </div>
-    <div class="sets">3 × 12–15 reps</div>
-    <div class="desc">Máquina específica de hip thrust (Glute Drive). Sentado com costas apoiadas, almofada sobre a pelve, empurra o quadril pra cima. Trabalha glúteo <strong>e ajuda a estabilizar o posterior</strong>.</div>
-    <div class="links">
-      <a class="yt" target="_blank" rel="noopener" href="https://www.youtube.com/results?search_query=glute+drive+m%C3%A1quina+eleva%C3%A7%C3%A3o+p%C3%A9lvica">▶ Vídeo</a>
-      <a target="_blank" rel="noopener" href="https://www.google.com/search?tbm=isch&q=glute+drive+machine">🖼 Imagem</a>
-    </div>
-  </div>
-
-  <div class="section-title">🟨 Bíceps</div>
-
-  <div class="ex">
-    <div class="ex-head">
-      <div class="ex-name"><span class="ex-num">8</span> Rosca Direta (Halter ou Barra W)</div>
-      <span class="tag livre">Livre</span>
-    </div>
-    <div class="sets">3 × 10–12 reps</div>
-    <div class="desc">Em pé, cotovelos colados ao corpo. Use barra W (reduz estresse no punho) ou par de halteres simultâneos. Subida controlada, descida em 2s.</div>
-    <div class="links">
-      <a class="yt" target="_blank" rel="noopener" href="https://www.youtube.com/results?search_query=rosca+direta+barra+w+execu%C3%A7%C3%A3o">▶ Vídeo</a>
-      <a target="_blank" rel="noopener" href="https://www.google.com/search?tbm=isch&q=ez+bar+curl">🖼 Imagem</a>
-    </div>
-  </div>
-
-  <div class="ex">
-    <div class="ex-head">
-      <div class="ex-name"><span class="ex-num">9</span> Rosca Martelo (Hammer)</div>
-      <span class="tag livre">Livre</span>
-    </div>
-    <div class="sets">3 × 12 reps</div>
-    <div class="desc">Halteres com pegada neutra (polegar pra cima). Foco em braquial e braquiorradial — dá grossura ao braço.</div>
-    <div class="links">
-      <a class="yt" target="_blank" rel="noopener" href="https://www.youtube.com/results?search_query=rosca+martelo+halter+execu%C3%A7%C3%A3o">▶ Vídeo</a>
-      <a target="_blank" rel="noopener" href="https://www.google.com/search?tbm=isch&q=hammer+curl+dumbbell">🖼 Imagem</a>
-    </div>
-  </div>
-
-  <div class="section-title">🟩 Panturrilha</div>
-
-  <div class="ex">
-    <div class="ex-head">
-      <div class="ex-name"><span class="ex-num">10</span> Panturrilha em Pé (Máquina)</div>
-      <span class="tag maquina">Máquina</span>
-    </div>
-    <div class="sets">4 × 15 reps</div>
-    <div class="desc">Máquina de standing calf raise (com almofada nos ombros) ou no smith. Amplitude completa: estica bem embaixo, contrai forte em cima.</div>
-    <div class="links">
-      <a class="yt" target="_blank" rel="noopener" href="https://www.youtube.com/results?search_query=panturrilha+em+p%C3%A9+m%C3%A1quina">▶ Vídeo</a>
-      <a target="_blank" rel="noopener" href="https://www.google.com/search?tbm=isch&q=standing+calf+raise+machine">🖼 Imagem</a>
-    </div>
-  </div>
-
-</section>
-
-<!-- ====================== TREINO B ====================== -->
-<section id="pane-b" class="pane">
-
-  <div class="section-title">🔥 Aquecimento</div>
-  <div class="ex">
-    <div class="ex-head">
-      <div class="ex-name"><span class="ex-num">0</span> Aeróbico leve</div>
-    </div>
-    <div class="sets">5–8 min</div>
-    <div class="desc">Bike ou esteira em ritmo leve.</div>
-  </div>
-
-  <div class="section-title">🟥 Peito</div>
-
-  <div class="ex">
-    <div class="ex-head">
-      <div class="ex-name"><span class="ex-num">1</span> Supino Máquina (Chest Press)</div>
-      <span class="tag maquina">Máquina</span>
-    </div>
-    <div class="sets">4 × 10 reps</div>
-    <div class="desc">Máquina de supino articulada, sentado, costas apoiadas. Pegada na altura do peito. Empurra até quase estender (sem travar o cotovelo).</div>
-    <div class="links">
-      <a class="yt" target="_blank" rel="noopener" href="https://www.youtube.com/results?search_query=supino+m%C3%A1quina+chest+press+execu%C3%A7%C3%A3o">▶ Vídeo</a>
-      <a target="_blank" rel="noopener" href="https://www.google.com/search?tbm=isch&q=chest+press+machine">🖼 Imagem</a>
-    </div>
-  </div>
-
-  <div class="ex">
-    <div class="ex-head">
-      <div class="ex-name"><span class="ex-num">2</span> Voador (Peck Deck)</div>
-      <span class="tag maquina">Máquina</span>
-    </div>
-    <div class="sets">3 × 12 reps</div>
-    <div class="desc">Máquina de peck deck. Sentado, antebraços nas almofadas, junta os braços à frente do peito. Isolamento de peitoral.</div>
-    <div class="links">
-      <a class="yt" target="_blank" rel="noopener" href="https://www.youtube.com/results?search_query=voador+peck+deck+execu%C3%A7%C3%A3o">▶ Vídeo</a>
-      <a target="_blank" rel="noopener" href="https://www.google.com/search?tbm=isch&q=pec+deck+machine">🖼 Imagem</a>
-    </div>
-  </div>
-
-  <div class="ex">
-    <div class="ex-head">
-      <div class="ex-name"><span class="ex-num">3</span> Crossover na Polia</div>
-      <span class="tag polia">Polia</span>
-    </div>
-    <div class="sets">3 × 12 reps</div>
-    <div class="desc">Cross-over: duas polias altas, um cabo em cada mão, traz as mãos pra frente cruzando levemente. Variação alta = parte média/inferior do peito.</div>
-    <div class="links">
-      <a class="yt" target="_blank" rel="noopener" href="https://www.youtube.com/results?search_query=crossover+polia+peitoral">▶ Vídeo</a>
-      <a target="_blank" rel="noopener" href="https://www.google.com/search?tbm=isch&q=cable+crossover+chest">🖼 Imagem</a>
-    </div>
-  </div>
-
-  <div class="section-title">🟪 Quadríceps</div>
-
-  <div class="ex">
-    <div class="ex-head">
-      <div class="ex-name"><span class="ex-num">4</span> Leg Press 45°</div>
-      <span class="tag maquina">Máquina</span>
-    </div>
-    <div class="sets">4 × 10–12 reps</div>
-    <div class="desc">Pés na plataforma, na largura dos ombros, ligeiramente baixos (foco quad). Desce até <strong>~90° no joelho</strong> — não force amplitude máxima ainda (preserva posterior).</div>
-    <div class="note-warn">⚠ Cuidado com amplitude excessiva — pés muito altos jogam carga no posterior. Mantenha pés centrais/baixos.</div>
-    <div class="links">
-      <a class="yt" target="_blank" rel="noopener" href="https://www.youtube.com/results?search_query=leg+press+45+graus+execu%C3%A7%C3%A3o">▶ Vídeo</a>
-      <a target="_blank" rel="noopener" href="https://www.google.com/search?tbm=isch&q=leg+press+45+machine">🖼 Imagem</a>
-    </div>
-  </div>
-
-  <div class="ex">
-    <div class="ex-head">
-      <div class="ex-name"><span class="ex-num">5</span> Cadeira Extensora</div>
-      <span class="tag maquina">Máquina</span>
-    </div>
-    <div class="sets">3 × 12 reps</div>
-    <div class="desc">Isolamento puro de quadríceps. Sentado, rolo no tornozelo, estende as pernas até o topo. Segura 1s contraído.</div>
-    <div class="links">
-      <a class="yt" target="_blank" rel="noopener" href="https://www.youtube.com/results?search_query=cadeira+extensora+leg+extension">▶ Vídeo</a>
-      <a target="_blank" rel="noopener" href="https://www.google.com/search?tbm=isch&q=leg+extension+machine">🖼 Imagem</a>
-    </div>
-  </div>
-
-  <div class="ex">
-    <div class="ex-head">
-      <div class="ex-name"><span class="ex-num">6</span> Cadeira Adutora</div>
-      <span class="tag maquina">Máquina</span>
-    </div>
-    <div class="sets">3 × 15 reps</div>
-    <div class="desc">Sentado, apoios nas faces internas das coxas, fecha as pernas. Trabalha adutores — estabilizadores importantes para proteger o posterior.</div>
-    <div class="links">
-      <a class="yt" target="_blank" rel="noopener" href="https://www.youtube.com/results?search_query=cadeira+adutora+execu%C3%A7%C3%A3o">▶ Vídeo</a>
-      <a target="_blank" rel="noopener" href="https://www.google.com/search?tbm=isch&q=hip+adduction+machine">🖼 Imagem</a>
-    </div>
-  </div>
-
-  <div class="section-title">🟫 Ombro</div>
-
-  <div class="ex">
-    <div class="ex-head">
-      <div class="ex-name"><span class="ex-num">7</span> Desenvolvimento Máquina</div>
-      <span class="tag maquina">Máquina</span>
-    </div>
-    <div class="sets">3 × 10–12 reps</div>
-    <div class="desc">Shoulder press machine, sentado com costas apoiadas. Pegada neutra ou pronada. Empurra os pegadores acima da cabeça.</div>
-    <div class="links">
-      <a class="yt" target="_blank" rel="noopener" href="https://www.youtube.com/results?search_query=desenvolvimento+m%C3%A1quina+shoulder+press">▶ Vídeo</a>
-      <a target="_blank" rel="noopener" href="https://www.google.com/search?tbm=isch&q=shoulder+press+machine">🖼 Imagem</a>
-    </div>
-  </div>
-
-  <div class="ex">
-    <div class="ex-head">
-      <div class="ex-name"><span class="ex-num">8</span> Elevação Lateral (Máquina ou Polia)</div>
-      <span class="tag maquina">Máquina</span>
-    </div>
-    <div class="sets">3 × 12–15 reps</div>
-    <div class="desc">Máquina de elevação lateral (lateral raise machine) — braços nas almofadas, abre lateralmente até a altura do ombro. Se não tiver, use polia baixa unilateral.</div>
-    <div class="links">
-      <a class="yt" target="_blank" rel="noopener" href="https://www.youtube.com/results?search_query=eleva%C3%A7%C3%A3o+lateral+m%C3%A1quina">▶ Vídeo</a>
-      <a target="_blank" rel="noopener" href="https://www.google.com/search?tbm=isch&q=lateral+raise+machine">🖼 Imagem</a>
-    </div>
-  </div>
-
-  <div class="section-title">🟨 Tríceps</div>
-
-  <div class="ex">
-    <div class="ex-head">
-      <div class="ex-name"><span class="ex-num">9</span> Tríceps Testa (Halter ou Barra W)</div>
-      <span class="tag livre">Livre</span>
-    </div>
-    <div class="sets">3 × 10–12 reps</div>
-    <div class="desc">Deitado no banco, halteres ou barra W. Cotovelos apontados pra cima, desce o peso até a testa, estende. <strong>Cotovelo fixo</strong>.</div>
-    <div class="links">
-      <a class="yt" target="_blank" rel="noopener" href="https://www.youtube.com/results?search_query=tr%C3%ADceps+testa+halter+skull+crusher">▶ Vídeo</a>
-      <a target="_blank" rel="noopener" href="https://www.google.com/search?tbm=isch&q=skull+crusher+exercise">🖼 Imagem</a>
-    </div>
-  </div>
-
-  <div class="ex">
-    <div class="ex-head">
-      <div class="ex-name"><span class="ex-num">10</span> Tríceps Corda (Polia)</div>
-      <span class="tag polia">Polia</span>
-    </div>
-    <div class="sets">3 × 12–15 reps</div>
-    <div class="desc">Polia alta com corda. Em pé, cotovelos colados ao corpo, abre a corda na parte de baixo. Finalizador.</div>
-    <div class="links">
-      <a class="yt" target="_blank" rel="noopener" href="https://www.youtube.com/results?search_query=tr%C3%ADceps+corda+polia+pushdown">▶ Vídeo</a>
-      <a target="_blank" rel="noopener" href="https://www.google.com/search?tbm=isch&q=triceps+rope+pushdown">🖼 Imagem</a>
-    </div>
-  </div>
-
-  <div class="section-title">🟩 Panturrilha</div>
-
-  <div class="ex">
-    <div class="ex-head">
-      <div class="ex-name"><span class="ex-num">11</span> Panturrilha Sentado</div>
-      <span class="tag maquina">Máquina</span>
-    </div>
-    <div class="sets">4 × 15 reps</div>
-    <div class="desc">Máquina seated calf raise — almofada sobre os joelhos, ponta dos pés na plataforma. Trabalha o sóleo (camada profunda).</div>
-    <div class="links">
-      <a class="yt" target="_blank" rel="noopener" href="https://www.youtube.com/results?search_query=panturrilha+sentado+seated+calf+raise">▶ Vídeo</a>
-      <a target="_blank" rel="noopener" href="https://www.google.com/search?tbm=isch&q=seated+calf+raise+machine">🖼 Imagem</a>
-    </div>
-  </div>
-
-</section>
+<div id="pane-a" class="pane active"></div>
+<div id="pane-b" class="pane"></div>
 
 <footer>
-  Registre os pesos e datas em <code>registro-treino.xlsx</code> — uma linha por série feita.
+  Dados salvos no navegador (localStorage). Exporta pra <code>registro-treino.xlsx</code> quando quiser.
 </footer>
 
+<!-- Modal histórico -->
+<div class="modal-bg" id="modalHist">
+  <div class="modal">
+    <div class="modal-close"><button class="btn" id="btnCloseHist">✕ Fechar</button></div>
+    <h2>📊 Histórico</h2>
+    <div id="histContent"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="./xlsx.full.min.js"></script>
 <script>
-  document.querySelectorAll('.tabs button').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const pane = btn.dataset.pane;
-      document.querySelectorAll('.tabs button').forEach(b => b.classList.toggle('active', b === btn));
-      document.querySelectorAll('.pane').forEach(p => p.classList.toggle('active', p.id === 'pane-' + pane));
-      window.scrollTo({top: 0, behavior: 'smooth'});
+// ============== DADOS DOS TREINOS ==============
+const TREINOS = {
+  A: {
+    titulo: "Posterior",
+    secoes: [
+      { titulo: "🔥 Aquecimento", exercicios: [
+        { nome:"Aeróbico leve", tipo:null, sets:"5–8 min", desc:"Bike ou esteira em ritmo leve. Aquece articulações e eleva FC.", warn:false, log:false }
+      ]},
+      { titulo: "🟦 Costas", exercicios: [
+        { nome:"Puxada Alta (Pulldown)", tipo:"maquina", sets:"4 × 10–12", desc:"Máquina com barra/pegador. Sentado, banco com apoio. <strong>Pegada pronada aberta</strong>, puxa até o peito.", warn:false, vid:"puxada+alta+pulldown+m%C3%A1quina+execu%C3%A7%C3%A3o", img:"lat+pulldown+machine+gym" },
+        { nome:"Remada Sentada (Cabo)", tipo:"polia", sets:"3 × 12", desc:"Polia baixa com triângulo. Sentado, pés apoiados, puxa até o abdome <strong>juntando escápulas</strong>.", warn:false, vid:"remada+sentada+m%C3%A1quina+cabo", img:"seated+cable+row+machine" },
+        { nome:"Remada Máquina (Articulada)", tipo:"maquina", sets:"3 × 10", desc:"Máquina com apoio para o peito (chest-supported). Pegada neutra ou pronada. Isola dorsais sem sobrecarga lombar.", warn:false, vid:"remada+m%C3%A1quina+chest+supported+row", img:"chest+supported+row+machine" },
+        { nome:"Pulldown Braço Estendido", tipo:"polia", sets:"3 × 15", desc:"Polia alta com barra. Em pé, braços estendidos, empurra a barra até a coxa só com o dorsal. Pouca carga.", warn:false, vid:"pulldown+bra%C3%A7o+estendido+straight+arm", img:"straight+arm+pulldown" },
+      ]},
+      { titulo: "🟧 Posterior de Coxa & Glúteo", warn:true, exercicios: [
+        { nome:"Mesa Flexora (Deitada)", tipo:"maquina", sets:"3 × 15 leve", desc:"Deitado de bruços, rolo acima do tendão de Aquiles. Flexiona até o glúteo.", noteWarn:"⚠ 30–50% da carga habitual. <strong>3s na descida</strong>. Sem rebote.", warn:true, vid:"mesa+flexora+lying+leg+curl", img:"lying+leg+curl+machine" },
+        { nome:"Cadeira Flexora Sentada (Unilateral)", tipo:"maquina", sets:"3 × 12 cada perna", desc:"Versão sentada. <strong>Unilateral</strong> — corrige assimetria entre perna lesionada e sadia.", noteWarn:"⚠ Carga muito leve. Foco na contração, não no peso. 3s na descida.", warn:true, vid:"cadeira+flexora+sentada+unilateral", img:"seated+leg+curl+machine" },
+        { nome:"Elevação Pélvica Máquina (Glute Drive)", tipo:"maquina", sets:"3 × 12–15", desc:"Máquina específica de hip thrust. Sentado, costas apoiadas, almofada na pelve. Trabalha glúteo e ajuda a estabilizar o posterior.", warn:false, vid:"glute+drive+m%C3%A1quina", img:"glute+drive+machine" },
+      ]},
+      { titulo: "🟨 Bíceps", exercicios: [
+        { nome:"Rosca Direta (Halter ou Barra W)", tipo:"livre", sets:"3 × 10–12", desc:"Em pé, cotovelos colados. Barra W (reduz estresse no punho) ou halteres. Subida controlada, 2s na descida.", warn:false, vid:"rosca+direta+barra+w", img:"ez+bar+curl" },
+        { nome:"Rosca Martelo (Hammer)", tipo:"livre", sets:"3 × 12", desc:"Halteres com pegada neutra (polegar pra cima). Foco em braquial — dá grossura ao braço.", warn:false, vid:"rosca+martelo+halter", img:"hammer+curl+dumbbell" },
+      ]},
+      { titulo: "🟩 Panturrilha", exercicios: [
+        { nome:"Panturrilha em Pé (Máquina)", tipo:"maquina", sets:"4 × 15", desc:"Standing calf raise. Amplitude completa: estica bem embaixo, contrai forte em cima.", warn:false, vid:"panturrilha+em+p%C3%A9+m%C3%A1quina", img:"standing+calf+raise+machine" },
+      ]},
+    ]
+  },
+  B: {
+    titulo: "Anterior",
+    secoes: [
+      { titulo: "🔥 Aquecimento", exercicios: [
+        { nome:"Aeróbico leve", tipo:null, sets:"5–8 min", desc:"Bike ou esteira em ritmo leve.", warn:false, log:false }
+      ]},
+      { titulo: "🟥 Peito", exercicios: [
+        { nome:"Supino Máquina (Chest Press)", tipo:"maquina", sets:"4 × 10", desc:"Sentado, costas apoiadas. Pegada na altura do peito. Empurra até quase estender (sem travar cotovelo).", warn:false, vid:"supino+m%C3%A1quina+chest+press", img:"chest+press+machine" },
+        { nome:"Voador (Peck Deck)", tipo:"maquina", sets:"3 × 12", desc:"Sentado, antebraços nas almofadas, junta os braços à frente. Isolamento de peitoral.", warn:false, vid:"voador+peck+deck", img:"pec+deck+machine" },
+        { nome:"Crossover na Polia", tipo:"polia", sets:"3 × 12", desc:"Duas polias altas, cabo em cada mão, traz à frente cruzando levemente. Foco no peitoral médio/inferior.", warn:false, vid:"crossover+polia+peitoral", img:"cable+crossover+chest" },
+      ]},
+      { titulo: "🟪 Quadríceps", exercicios: [
+        { nome:"Leg Press 45°", tipo:"maquina", sets:"4 × 10–12", desc:"Pés na largura dos ombros, <strong>ligeiramente baixos</strong> (foco quad). Desce até ~90° no joelho.", noteWarn:"⚠ Pés muito altos sobrecarregam o posterior. Mantenha pés centrais/baixos.", warn:true, vid:"leg+press+45+graus", img:"leg+press+45+machine" },
+        { nome:"Cadeira Extensora", tipo:"maquina", sets:"3 × 12", desc:"Isolamento de quadríceps. Sentado, rolo no tornozelo, estende até o topo. Segura 1s contraído.", warn:false, vid:"cadeira+extensora+leg+extension", img:"leg+extension+machine" },
+        { nome:"Cadeira Adutora", tipo:"maquina", sets:"3 × 15", desc:"Sentado, apoios na face interna das coxas, fecha as pernas. Estabilizadores importantes pra proteger o posterior.", warn:false, vid:"cadeira+adutora", img:"hip+adduction+machine" },
+      ]},
+      { titulo: "🟫 Ombro", exercicios: [
+        { nome:"Desenvolvimento Máquina", tipo:"maquina", sets:"3 × 10–12", desc:"Shoulder press, sentado com costas apoiadas. Pegada neutra ou pronada. Empurra acima da cabeça.", warn:false, vid:"desenvolvimento+m%C3%A1quina+shoulder+press", img:"shoulder+press+machine" },
+        { nome:"Elevação Lateral (Máquina ou Polia)", tipo:"maquina", sets:"3 × 12–15", desc:"Máquina de lateral raise — abre lateralmente até a altura do ombro. Alternativa: polia baixa unilateral.", warn:false, vid:"eleva%C3%A7%C3%A3o+lateral+m%C3%A1quina", img:"lateral+raise+machine" },
+      ]},
+      { titulo: "🟨 Tríceps", exercicios: [
+        { nome:"Tríceps Testa (Halter/Barra W)", tipo:"livre", sets:"3 × 10–12", desc:"Deitado no banco. Cotovelos apontados pra cima, desce até a testa, estende. <strong>Cotovelo fixo</strong>.", warn:false, vid:"tr%C3%ADceps+testa+halter+skull+crusher", img:"skull+crusher+exercise" },
+        { nome:"Tríceps Corda (Polia)", tipo:"polia", sets:"3 × 12–15", desc:"Polia alta com corda. Em pé, cotovelos colados, abre a corda na parte de baixo. Finalizador.", warn:false, vid:"tr%C3%ADceps+corda+polia+pushdown", img:"triceps+rope+pushdown" },
+      ]},
+      { titulo: "🟩 Panturrilha", exercicios: [
+        { nome:"Panturrilha Sentado", tipo:"maquina", sets:"4 × 15", desc:"Seated calf raise — almofada sobre os joelhos, ponta dos pés na plataforma. Foco no sóleo.", warn:false, vid:"panturrilha+sentado+seated+calf+raise", img:"seated+calf+raise+machine" },
+      ]},
+    ]
+  }
+};
+
+// ============== ESTADO ==============
+const STORAGE_KEY = 'treino-registros-v1';
+const state = {
+  registros: load(),
+  treino: 'A',
+};
+
+function load(){
+  try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || []; }
+  catch(e){ return []; }
+}
+function save(){
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(state.registros));
+}
+
+function todayISO(){
+  const d = new Date();
+  const pad = n => String(n).padStart(2,'0');
+  return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
+}
+function todayBR(){
+  const d = new Date();
+  const pad = n => String(n).padStart(2,'0');
+  return `${pad(d.getDate())}/${pad(d.getMonth()+1)}/${d.getFullYear()}`;
+}
+function uid(){ return Math.random().toString(36).slice(2,11); }
+
+// ============== TOAST ==============
+let toastTimer;
+function toast(msg, err=false){
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.classList.toggle('err', err);
+  el.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(()=> el.classList.remove('show'), 2200);
+}
+
+// ============== RENDER ==============
+function tagHtml(tipo){
+  if(!tipo) return '';
+  const labels = { maquina:'Máquina', polia:'Polia', livre:'Livre' };
+  return `<span class="tag ${tipo}">${labels[tipo]}</span>`;
+}
+
+function seriesHoje(exNome){
+  const hoje = todayISO();
+  return state.registros
+    .filter(r => r.data === hoje && r.treino === state.treino && r.exercicio === exNome)
+    .sort((a,b)=> a.serie - b.serie);
+}
+
+function ultimoRegistro(exNome){
+  const hoje = todayISO();
+  const passados = state.registros
+    .filter(r => r.exercicio === exNome && r.data !== hoje)
+    .sort((a,b)=> b.data.localeCompare(a.data) || b.serie - a.serie);
+  return passados[0] || null;
+}
+
+function maxCarga(exNome){
+  const arr = state.registros.filter(r => r.exercicio === exNome);
+  return arr.length ? Math.max(...arr.map(r => Number(r.carga) || 0)) : 0;
+}
+
+function diasDesde(dataISO){
+  const a = new Date(dataISO + 'T00:00:00');
+  const b = new Date(todayISO() + 'T00:00:00');
+  const dias = Math.round((b - a) / 86400000);
+  if(dias === 0) return 'hoje';
+  if(dias === 1) return 'ontem';
+  return `há ${dias}d`;
+}
+
+function exHtml(ex, idx, secaoWarn){
+  const isWarn = ex.warn || secaoWarn;
+  const podeLog = ex.log !== false && ex.tipo !== null;
+  const ultimo = podeLog ? ultimoRegistro(ex.nome) : null;
+  const max = podeLog ? maxCarga(ex.nome) : 0;
+
+  let histHtml = '';
+  if(podeLog && ultimo){
+    histHtml = `<div class="hist-info">
+      <span>📈 Última: <b>${ultimo.carga}kg × ${ultimo.reps}</b> <span style="color:var(--muted)">(${diasDesde(ultimo.data)})</span></span>
+      ${max > 0 ? `<span>🏆 Máx: <b>${max}kg</b></span>` : ''}
+    </div>`;
+  }
+
+  let logHtml = '';
+  if(podeLog){
+    const series = seriesHoje(ex.nome);
+    const proxSerie = series.length + 1;
+    const sugReps = ultimo ? ultimo.reps : '';
+    const sugCarga = ultimo ? ultimo.carga : '';
+
+    logHtml = `
+      <div class="series-list" data-list="${escAttr(ex.nome)}">
+        ${series.length === 0 ? '<div class="empty">Nenhuma série registrada hoje</div>' : series.map(s => serieRowHtml(s)).join('')}
+      </div>
+      <form class="log-form" data-ex="${escAttr(ex.nome)}" data-grupo="${escAttr(ex.grupo||'')}" data-tipo="${ex.tipo||''}">
+        <input type="number" inputmode="numeric" name="reps" placeholder="reps" min="0" max="100" value="${sugReps}">
+        <input type="number" inputmode="decimal" step="0.5" name="carga" placeholder="kg" min="0" max="1000" value="${sugCarga}">
+        <input type="number" inputmode="numeric" name="rpe" placeholder="RPE" min="1" max="10">
+        <button type="submit" class="btn-save" title="Salvar série ${proxSerie}">✓ ${proxSerie}ª</button>
+      </form>
+    `;
+  }
+
+  return `
+    <div class="ex ${isWarn ? 'warn' : ''}">
+      <div class="ex-head">
+        <div class="ex-name"><span class="ex-num">${idx}</span> ${ex.nome}</div>
+        ${tagHtml(ex.tipo)}
+      </div>
+      <div class="sets">${ex.sets}</div>
+      <div class="desc">${ex.desc}</div>
+      ${ex.noteWarn ? `<div class="note-warn">${ex.noteWarn}</div>` : ''}
+      ${histHtml}
+      ${logHtml}
+      ${ex.vid ? `<div class="links">
+        <a target="_blank" rel="noopener" href="https://www.youtube.com/results?search_query=${ex.vid}">▶ Vídeo</a>
+        <a target="_blank" rel="noopener" href="https://www.google.com/search?tbm=isch&q=${ex.img}">🖼 Imagem</a>
+      </div>` : ''}
+    </div>
+  `;
+}
+
+function serieRowHtml(s){
+  return `<div class="serie-row" data-id="${s.id}">
+    <span class="num">${s.serie}ª</span>
+    <span class="vals"><b>${s.carga}kg</b> × ${s.reps}</span>
+    ${s.rpe ? `<span class="rpe">RPE ${s.rpe}</span>` : ''}
+    <button class="del" title="Remover" data-del="${s.id}">✕</button>
+  </div>`;
+}
+
+function escAttr(s){ return String(s).replace(/"/g,'&quot;'); }
+
+function renderTreino(letra){
+  const t = TREINOS[letra];
+  const grupos = {};
+  let idx = 0;
+  const html = t.secoes.map(sec => {
+    const ehWarn = sec.warn === true;
+    const exs = sec.exercicios.map(ex => {
+      const grupo = sec.titulo.replace(/^[^\w]+/, '').split(' ')[0];
+      ex.grupo = grupo;
+      idx++;
+      return exHtml(ex, idx, ehWarn);
+    }).join('');
+    return `<div class="section-title">${sec.titulo}${ehWarn ? ' <span style="color:var(--warn);font-size:10px">— atenção lesão</span>' : ''}</div>${exs}`;
+  }).join('');
+  document.getElementById('pane-'+letra.toLowerCase()).innerHTML = html;
+}
+
+function renderAll(){
+  document.getElementById('todayLabel').textContent = todayBR();
+  renderTreino('A');
+  renderTreino('B');
+  attachFormHandlers();
+}
+
+// ============== HANDLERS ==============
+function attachFormHandlers(){
+  document.querySelectorAll('.log-form').forEach(form => {
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      const fd = new FormData(form);
+      const reps = Number(fd.get('reps'));
+      const carga = Number(fd.get('carga'));
+      const rpe = fd.get('rpe') ? Number(fd.get('rpe')) : null;
+      const exNome = form.dataset.ex;
+      const grupo = form.dataset.grupo;
+      const tipo = form.dataset.tipo;
+
+      if(!reps || reps < 1){ toast('Informe as reps', true); return; }
+      if(carga === null || carga === undefined || isNaN(carga)){ toast('Informe a carga', true); return; }
+
+      const serieNum = seriesHoje(exNome).length + 1;
+      state.registros.push({
+        id: uid(),
+        data: todayISO(),
+        treino: state.treino,
+        grupo, tipo,
+        exercicio: exNome,
+        serie: serieNum,
+        reps, carga,
+        rpe: rpe || '',
+        obs: '',
+        ts: Date.now(),
+      });
+      save();
+
+      // Atualiza só o card desse exercício para evitar re-render geral
+      updateExCard(exNome);
+      toast(`✓ ${serieNum}ª série salva — ${carga}kg × ${reps}`);
+
+      form.querySelector('[name="rpe"]').value = '';
     });
   });
+
+  // Delete série
+  document.querySelectorAll('[data-del]').forEach(btn => {
+    btn.addEventListener('click', e => {
+      const id = btn.dataset.del;
+      if(!confirm('Remover esta série?')) return;
+      const reg = state.registros.find(r => r.id === id);
+      state.registros = state.registros.filter(r => r.id !== id);
+      // Renumera as séries do mesmo exercício/dia/treino
+      const hoje = todayISO();
+      const mesmoEx = state.registros
+        .filter(r => r.data === hoje && r.treino === state.treino && r.exercicio === reg.exercicio)
+        .sort((a,b)=> a.ts - b.ts);
+      mesmoEx.forEach((r,i)=> r.serie = i+1);
+      save();
+      if(reg) updateExCard(reg.exercicio);
+    });
+  });
+}
+
+function updateExCard(exNome){
+  // Encontra o card e re-renderiza apenas a lista + form
+  const form = document.querySelector(`.log-form[data-ex="${escAttr(exNome)}"]`);
+  if(!form) return;
+  const card = form.closest('.ex');
+  const series = seriesHoje(exNome);
+  const proxSerie = series.length + 1;
+
+  // Atualiza lista
+  const list = card.querySelector('.series-list');
+  list.innerHTML = series.length === 0
+    ? '<div class="empty">Nenhuma série registrada hoje</div>'
+    : series.map(s => serieRowHtml(s)).join('');
+
+  // Atualiza histórico
+  const ultimo = ultimoRegistro(exNome);
+  const max = maxCarga(exNome);
+  let histEl = card.querySelector('.hist-info');
+  if(ultimo){
+    const newHist = `<div class="hist-info">
+      <span>📈 Última: <b>${ultimo.carga}kg × ${ultimo.reps}</b> <span style="color:var(--muted)">(${diasDesde(ultimo.data)})</span></span>
+      ${max > 0 ? `<span>🏆 Máx: <b>${max}kg</b></span>` : ''}
+    </div>`;
+    if(histEl){
+      histEl.outerHTML = newHist;
+    } else {
+      const noteWarn = card.querySelector('.note-warn');
+      const ref = noteWarn || card.querySelector('.desc');
+      ref.insertAdjacentHTML('afterend', newHist);
+    }
+  }
+
+  // Atualiza número do próximo botão
+  form.querySelector('.btn-save').textContent = `✓ ${proxSerie}ª`;
+  form.querySelector('.btn-save').title = `Salvar série ${proxSerie}`;
+
+  // Reattacha listeners das séries
+  list.querySelectorAll('[data-del]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const id = btn.dataset.del;
+      if(!confirm('Remover esta série?')) return;
+      const reg = state.registros.find(r => r.id === id);
+      state.registros = state.registros.filter(r => r.id !== id);
+      const hoje = todayISO();
+      const mesmoEx = state.registros
+        .filter(r => r.data === hoje && r.treino === state.treino && r.exercicio === reg.exercicio)
+        .sort((a,b)=> a.ts - b.ts);
+      mesmoEx.forEach((r,i)=> r.serie = i+1);
+      save();
+      updateExCard(reg.exercicio);
+    });
+  });
+}
+
+// ============== TABS ==============
+document.querySelectorAll('.tabs button').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const pane = btn.dataset.pane;
+    document.querySelectorAll('.tabs button').forEach(b => b.classList.toggle('active', b === btn));
+    document.querySelectorAll('.pane').forEach(p => p.classList.toggle('active', p.id === 'pane-' + pane));
+    state.treino = pane.toUpperCase();
+    // Re-render pra atualizar listas de série (séries do dia dependem do treino selecionado)
+    renderAll();
+    window.scrollTo(0, 0);
+  });
+});
+
+// ============== EXPORT XLSX ==============
+document.getElementById('btnExport').addEventListener('click', () => {
+  if(state.registros.length === 0){
+    if(!confirm('Não há registros ainda. Exportar planilha vazia mesmo assim?')) return;
+  }
+
+  const wb = XLSX.utils.book_new();
+
+  // Aba Registro
+  const header = ['Data','Treino','Grupo','Exercício','Tipo','Série','Reps','Carga (kg)','RPE','Observações'];
+  const rows = [...state.registros]
+    .sort((a,b)=> a.ts - b.ts)
+    .map(r => [r.data, r.treino, r.grupo, r.exercicio, r.tipo, r.serie, r.reps, r.carga, r.rpe || '', r.obs || '']);
+  const wsReg = XLSX.utils.aoa_to_sheet([header, ...rows]);
+  wsReg['!cols'] = [{wch:12},{wch:8},{wch:14},{wch:38},{wch:10},{wch:8},{wch:8},{wch:12},{wch:6},{wch:30}];
+  XLSX.utils.book_append_sheet(wb, wsReg, 'Registro');
+
+  // Abas de referência
+  ['A','B'].forEach(letra => {
+    const t = TREINOS[letra];
+    const rowsT = [['Seção','Exercício','Tipo','Séries x Reps']];
+    t.secoes.forEach(sec => sec.exercicios.forEach(ex => {
+      if(ex.tipo) rowsT.push([sec.titulo, ex.nome, ex.tipo, ex.sets]);
+    }));
+    const ws = XLSX.utils.aoa_to_sheet(rowsT);
+    ws['!cols'] = [{wch:24},{wch:40},{wch:10},{wch:18}];
+    XLSX.utils.book_append_sheet(wb, ws, 'Treino '+letra);
+  });
+
+  // Aba Resumo
+  const exs = [...new Set(state.registros.map(r => r.exercicio))].sort();
+  const resRows = [['Exercício','Carga Máx (kg)','Última Carga (kg)','Última Data','Total Séries']];
+  exs.forEach(ex => {
+    const arr = state.registros.filter(r => r.exercicio === ex);
+    const max = Math.max(...arr.map(r => Number(r.carga) || 0));
+    const ord = [...arr].sort((a,b)=> b.ts - a.ts);
+    const ult = ord[0];
+    resRows.push([ex, max, ult.carga, ult.data, arr.length]);
+  });
+  const wsRes = XLSX.utils.aoa_to_sheet(resRows);
+  wsRes['!cols'] = [{wch:40},{wch:14},{wch:16},{wch:14},{wch:12}];
+  XLSX.utils.book_append_sheet(wb, wsRes, 'Resumo');
+
+  const filename = `registro-treino_${todayISO()}.xlsx`;
+  XLSX.writeFile(wb, filename);
+  toast(`✓ ${filename} baixado`);
+});
+
+// ============== IMPORT XLSX ==============
+document.getElementById('btnImport').addEventListener('click', () => {
+  document.getElementById('fileImport').click();
+});
+document.getElementById('fileImport').addEventListener('change', e => {
+  const file = e.target.files[0];
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = ev => {
+    try{
+      const data = new Uint8Array(ev.target.result);
+      const wb = XLSX.read(data, {type:'array', cellDates:true});
+      if(!wb.SheetNames.includes('Registro')){
+        toast('Aba "Registro" não encontrada', true);
+        return;
+      }
+      const ws = wb.Sheets['Registro'];
+      const rows = XLSX.utils.sheet_to_json(ws, {header:1, raw:false, dateNF:'yyyy-mm-dd'});
+      if(rows.length < 2){
+        toast('Planilha vazia', true);
+        return;
+      }
+      const [header, ...body] = rows;
+      const idx = name => header.findIndex(h => String(h).toLowerCase().includes(name.toLowerCase()));
+      const iData = idx('Data'), iTreino = idx('Treino'), iGrupo = idx('Grupo'),
+            iEx = idx('Exercício'), iTipo = idx('Tipo'), iSerie = idx('Série'),
+            iReps = idx('Reps'), iCarga = idx('Carga'), iRpe = idx('RPE'), iObs = idx('Obs');
+
+      const importados = [];
+      let ts = Date.now();
+      body.forEach(row => {
+        if(!row[iEx] || !row[iData]) return;
+        let data = row[iData];
+        if(data instanceof Date){
+          const pad = n => String(n).padStart(2,'0');
+          data = `${data.getFullYear()}-${pad(data.getMonth()+1)}-${pad(data.getDate())}`;
+        } else if(typeof data === 'string'){
+          // tenta normalizar DD/MM/YYYY
+          const m = data.match(/^(\d{2})\/(\d{2})\/(\d{4})$/);
+          if(m) data = `${m[3]}-${m[2]}-${m[1]}`;
+        }
+        importados.push({
+          id: uid(),
+          data: String(data),
+          treino: String(row[iTreino] || 'A'),
+          grupo: String(row[iGrupo] || ''),
+          tipo: String(row[iTipo] || ''),
+          exercicio: String(row[iEx]),
+          serie: Number(row[iSerie]) || 1,
+          reps: Number(row[iReps]) || 0,
+          carga: Number(row[iCarga]) || 0,
+          rpe: row[iRpe] || '',
+          obs: row[iObs] || '',
+          ts: ts++,
+        });
+      });
+
+      if(importados.length === 0){ toast('Nenhuma linha válida', true); return; }
+
+      const modo = confirm(`Importar ${importados.length} linhas?\n\nOK = SUBSTITUIR registros atuais\nCancelar = MESCLAR (adicionar)`);
+      if(modo){
+        state.registros = importados;
+      } else {
+        state.registros = state.registros.concat(importados);
+      }
+      save();
+      renderAll();
+      attachFormHandlers();
+      toast(`✓ ${importados.length} séries importadas`);
+    } catch(err){
+      console.error(err);
+      toast('Erro ao ler arquivo', true);
+    }
+  };
+  reader.readAsArrayBuffer(file);
+  e.target.value = '';
+});
+
+// ============== HISTÓRICO ==============
+document.getElementById('btnHist').addEventListener('click', () => {
+  const dias = {};
+  state.registros.forEach(r => {
+    if(!dias[r.data]) dias[r.data] = { treino:r.treino, series:[] };
+    dias[r.data].series.push(r);
+  });
+  const datas = Object.keys(dias).sort((a,b)=> b.localeCompare(a));
+  let html = '';
+  if(datas.length === 0){
+    html = '<p style="color:var(--muted)">Nenhum treino registrado ainda.</p>';
+  } else {
+    datas.forEach(d => {
+      const grp = {};
+      dias[d].series.forEach(s => {
+        if(!grp[s.exercicio]) grp[s.exercicio] = [];
+        grp[s.exercicio].push(s);
+      });
+      const pad = n => String(n).padStart(2,'0');
+      const [y,m,dd] = d.split('-');
+      const dataBR = `${dd}/${m}/${y}`;
+      html += `<h3 style="margin:16px 0 6px 0;font-size:14px">📅 ${dataBR} — Treino ${dias[d].treino}</h3>`;
+      html += '<table><tr><th>Exercício</th><th>Séries</th><th>Máx</th></tr>';
+      Object.keys(grp).forEach(ex => {
+        const arr = grp[ex].sort((a,b)=> a.serie - b.serie);
+        const max = Math.max(...arr.map(s => Number(s.carga)||0));
+        const seriesStr = arr.map(s => `${s.carga}×${s.reps}`).join(' · ');
+        html += `<tr><td>${ex}</td><td style="font-size:11px">${seriesStr}</td><td><b>${max}kg</b></td></tr>`;
+      });
+      html += '</table>';
+    });
+    html += `<p style="color:var(--muted);font-size:11px;margin-top:16px">Total: ${state.registros.length} séries em ${datas.length} dias</p>`;
+    html += `<button class="btn danger" style="margin-top:8px" onclick="if(confirm('Apagar TODOS os registros? Essa ação é irreversível — exporte antes!')){state.registros=[];save();renderAll();document.getElementById('modalHist').classList.remove('open');toast('Histórico apagado');}">🗑 Apagar tudo</button>`;
+  }
+  document.getElementById('histContent').innerHTML = html;
+  document.getElementById('modalHist').classList.add('open');
+});
+document.getElementById('btnCloseHist').addEventListener('click', () => {
+  document.getElementById('modalHist').classList.remove('open');
+});
+document.getElementById('modalHist').addEventListener('click', e => {
+  if(e.target.id === 'modalHist') document.getElementById('modalHist').classList.remove('open');
+});
+
+// ============== START ==============
+renderAll();
 </script>
 
 </body>
