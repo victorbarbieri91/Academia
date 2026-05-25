@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Treino Full Body — A & B</title>
+<style>
+  :root{
+    --bg:#0f1419;
+    --card:#1a212b;
+    --card-hi:#222a36;
+    --line:#2c3645;
+    --txt:#e6edf3;
+    --muted:#8b98a9;
+    --accent:#4fc3f7;
+    --accent-2:#81c784;
+    --warn:#ffb74d;
+    --danger:#ef5350;
+    --tag-maq:#1e3a5f;
+    --tag-pol:#3d2e5c;
+    --tag-liv:#5c3d2e;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:var(--bg);color:var(--txt);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;-webkit-font-smoothing:antialiased}
+  body{padding:16px;max-width:780px;margin:0 auto;padding-bottom:80px}
+  header h1{margin:0 0 4px 0;font-size:24px;letter-spacing:-0.3px}
+  header p.sub{margin:0;color:var(--muted);font-size:14px}
+
+  .alert{background:linear-gradient(135deg,#3a2418,#4a2a1a);border:1px solid #6b3a20;border-radius:12px;padding:14px 16px;margin:16px 0;display:flex;gap:12px;align-items:flex-start}
+  .alert .ico{font-size:22px;line-height:1}
+  .alert h3{margin:0 0 4px 0;font-size:15px;color:var(--warn)}
+  .alert p{margin:0;font-size:13px;line-height:1.5;color:#e8d4bc}
+
+  .tabs{display:flex;gap:8px;margin:16px 0;background:var(--card);padding:6px;border-radius:12px;border:1px solid var(--line);position:sticky;top:8px;z-index:10;backdrop-filter:blur(8px)}
+  .tabs button{flex:1;background:transparent;color:var(--muted);border:none;padding:10px 12px;font-size:14px;font-weight:600;border-radius:8px;cursor:pointer;transition:all .15s}
+  .tabs button.active{background:var(--accent);color:#0a1218}
+  .tabs button:not(.active):hover{background:var(--card-hi);color:var(--txt)}
+
+  .pane{display:none}
+  .pane.active{display:block}
+
+  .section-title{font-size:13px;text-transform:uppercase;letter-spacing:1.2px;color:var(--muted);margin:20px 0 8px 0;padding-left:4px}
+
+  .ex{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;margin-bottom:10px;transition:border-color .15s}
+  .ex:hover{border-color:var(--accent)}
+  .ex.warn{border-left:4px solid var(--warn)}
+
+  .ex-head{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:8px}
+  .ex-name{display:flex;align-items:center;gap:8px;font-size:16px;font-weight:600;flex:1}
+  .ex-num{background:var(--card-hi);color:var(--muted);width:26px;height:26px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0}
+  .ex.warn .ex-num{background:var(--warn);color:#1a1208}
+
+  .tag{font-size:10px;text-transform:uppercase;letter-spacing:0.8px;padding:3px 8px;border-radius:999px;font-weight:700;white-space:nowrap}
+  .tag.maquina{background:var(--tag-maq);color:#9ecbff}
+  .tag.polia{background:var(--tag-pol);color:#c8a8ff}
+  .tag.livre{background:var(--tag-liv);color:#ffbd8c}
+
+  .sets{font-size:14px;color:var(--accent-2);font-weight:600;margin-bottom:6px}
+  .desc{font-size:13px;color:var(--muted);line-height:1.5;margin-bottom:10px}
+  .desc strong{color:#cbd5e0}
+  .note-warn{font-size:12px;color:var(--warn);background:rgba(255,183,77,.08);border-left:3px solid var(--warn);padding:6px 10px;border-radius:4px;margin-bottom:10px}
+
+  .links{display:flex;gap:6px;flex-wrap:wrap}
+  .links a{flex:1;min-width:0;text-align:center;text-decoration:none;background:var(--card-hi);color:var(--txt);padding:8px 10px;border-radius:8px;font-size:12px;font-weight:600;border:1px solid var(--line);transition:all .15s;display:inline-flex;align-items:center;justify-content:center;gap:6px}
+  .links a:hover{background:var(--accent);color:#0a1218;border-color:var(--accent)}
+  .links a.yt:hover{background:#e53935;color:#fff;border-color:#e53935}
+
+  footer{text-align:center;color:var(--muted);font-size:12px;margin-top:24px;padding-top:16px;border-top:1px solid var(--line)}
+  footer code{background:var(--card);padding:2px 6px;border-radius:4px;color:var(--accent)}
+
+  @media (max-width:480px){
+    body{padding:12px;padding-bottom:60px}
+    header h1{font-size:20px}
+    .ex-name{font-size:15px}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🏋️ Treino Full Body</h1>
+  <p class="sub">Treino A (Posterior) e Treino B (Anterior) — alternar entre os dias</p>
+</header>
+
+<div class="alert">
+  <div class="ico">⚠️</div>
+  <div>
+    <h3>Retorno de lesão — Posterior de coxa</h3>
+    <p>Carga <strong>leve a moderada</strong> nos posteriores. Foco em <strong>controle excêntrico (3-4s na descida)</strong>, amplitude sem dor, e parar 1-2 reps antes da falha. Aquecer 5 min em bike/esteira antes. Se sentir desconforto agudo, interrompa o exercício.</p>
+  </div>
+</div>
+
+<div class="tabs">
+  <button class="active" data-pane="a">Treino A — Posterior</button>
+  <button data-pane="b">Treino B — Anterior</button>
+</div>
+
+<!-- ====================== TREINO A ====================== -->
+<section id="pane-a" class="pane active">
+
+  <div class="section-title">🔥 Aquecimento</div>
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-name"><span class="ex-num">0</span> Aeróbico leve</div>
+    </div>
+    <div class="sets">5–8 min</div>
+    <div class="desc">Bike ergométrica ou esteira em ritmo leve. Foco em elevar a frequência cardíaca e aquecer articulações.</div>
+  </div>
+
+  <div class="section-title">🟦 Costas</div>
+
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-name"><span class="ex-num">1</span> Puxada Alta (Pulldown)</div>
+      <span class="tag maquina">Máquina</span>
+    </div>
+    <div class="sets">4 × 10–12 reps</div>
+    <div class="desc">Máquina com barra ou pegador, sentado, banco com apoio para coxas. Puxa a barra até a altura do peito. <strong>Pegada pronada, aberta</strong>.</div>
+    <div class="links">
+      <a class="yt" target="_blank" rel="noopener" href="https://www.youtube.com/results?search_query=puxada+alta+pulldown+m%C3%A1quina+execu%C3%A7%C3%A3o">▶ Vídeo</a>
+      <a target="_blank" rel="noopener" href="https://www.google.com/search?tbm=isch&q=lat+pulldown+machine+gym">🖼 Imagem</a>
+    </div>
+  </div>
+
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-name"><span class="ex-num">2</span> Remada Sentada (Cabo)</div>
+      <span class="tag polia">Polia</span>
+    </div>
+    <div class="sets">3 × 12 reps</div>
+    <div class="desc">Máquina de polia baixa com triângulo (pegador V). Sentado, pés apoiados, costas eretas, puxa o cabo até o abdome <strong>juntando as escápulas</strong>.</div>
+    <div class="links">
+      <a class="yt" target="_blank" rel="noopener" href="https://www.youtube.com/results?search_query=remada+sentada+m%C3%A1quina+cabo+execu%C3%A7%C3%A3o">▶ Vídeo</a>
+      <a target="_blank" rel="noopener" href="https://www.google.com/search?tbm=isch&q=seated+cable+row+machine">🖼 Imagem</a>
+    </div>
+  </div>
+
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-name"><span class="ex-num">3</span> Remada Máquina (Articulada)</div>
+      <span class="tag maquina">Máquina</span>
+    </div>
+    <div class="sets">3 × 10 reps</div>
+    <div class="desc">Máquina de remada com apoio para o peito (chest-supported row). Pegada neutra ou pronada. Excelente para isolar dorsais sem sobrecarga lombar.</div>
+    <div class="links">
+      <a class="yt" target="_blank" rel="noopener" href="https://www.youtube.com/results?search_query=remada+m%C3%A1quina+chest+supported+row">▶ Vídeo</a>
+      <a target="_blank" rel="noopener" href="https://www.google.com/search?tbm=isch&q=chest+supported+row+machine">🖼 Imagem</a>
+    </div>
+  </div>
+
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-name"><span class="ex-num">4</span> Pulldown Braço Estendido</div>
+      <span class="tag polia">Polia</span>
+    </div>
+    <div class="sets">3 × 15 reps</div>
+    <div class="desc">Polia alta com barra reta. Em pé, braços estendidos, "empurra" a barra pra baixo até a coxa só com força do dorsal. Pouca carga, isolamento.</div>
+    <div class="links">
+      <a class="yt" target="_blank" rel="noopener" href="https://www.youtube.com/results?search_query=pulldown+bra%C3%A7o+estendido+straight+arm+pulldown">▶ Vídeo</a>
+      <a target="_blank" rel="noopener" href="https://www.google.com/search?tbm=isch&q=straight+arm+pulldown">🖼 Imagem</a>
+    </div>
+  </div>
+
+  <div class="section-title">🟧 Posterior de Coxa & Glúteo <span style="color:var(--warn);font-size:11px">— atenção lesão</span></div>
+
+  <div class="ex warn">
+    <div class="ex-head">
+      <div class="ex-name"><span class="ex-num">5</span> Mesa Flexora (Deitada)</div>
+      <span class="tag maquina">Máquina</span>
+    </div>
+    <div class="sets">3 × 15 reps — carga leve</div>
+    <div class="desc">Máquina onde você fica deitado de bruços e flexiona os joelhos puxando o rolo até o glúteo. Ajusta o rolo logo acima do tendão de Aquiles.</div>
+    <div class="note-warn">⚠ Comece com 30–50% da carga habitual. Faça <strong>3s na descida (excêntrica)</strong>. Sem rebote. Pare se houver fisgada.</div>
+    <div class="links">
+      <a class="yt" target="_blank" rel="noopener" href="https://www.youtube.com/results?search_query=mesa+flexora+lying+leg+curl+execu%C3%A7%C3%A3o">▶ Vídeo</a>
+      <a target="_blank" rel="noopener" href="https://www.google.com/search?tbm=isch&q=lying+leg+curl+machine">🖼 Imagem</a>
+    </div>
+  </div>
+
+  <div class="ex warn">
+    <div class="ex-head">
+      <div class="ex-name"><span class="ex-num">6</span> Cadeira Flexora Sentada (Unilateral)</div>
+      <span class="tag maquina">Máquina</span>
+    </div>
+    <div class="sets">3 × 12 reps (cada perna)</div>
+    <div class="desc">Versão sentada da flexora. Faça <strong>unilateral</strong> (uma perna por vez) — ajuda a corrigir assimetria de força entre perna lesionada e sadia.</div>
+    <div class="note-warn">⚠ Carga muito leve. Foco em sentir a contração, não em peso. 3s na descida.</div>
+    <div class="links">
+      <a class="yt" target="_blank" rel="noopener" href="https://www.youtube.com/results?search_query=cadeira+flexora+sentada+unilateral">▶ Vídeo</a>
+      <a target="_blank" rel="noopener" href="https://www.google.com/search?tbm=isch&q=seated+leg+curl+machine">🖼 Imagem</a>
+    </div>
+  </div>
+
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-name"><span class="ex-num">7</span> Elevação Pélvica Máquina (Glute Drive)</div>
+      <span class="tag maquina">Máquina</span>
+    </div>
+    <div class="sets">3 × 12–15 reps</div>
+    <div class="desc">Máquina específica de hip thrust (Glute Drive). Sentado com costas apoiadas, almofada sobre a pelve, empurra o quadril pra cima. Trabalha glúteo <strong>e ajuda a estabilizar o posterior</strong>.</div>
+    <div class="links">
+      <a class="yt" target="_blank" rel="noopener" href="https://www.youtube.com/results?search_query=glute+drive+m%C3%A1quina+eleva%C3%A7%C3%A3o+p%C3%A9lvica">▶ Vídeo</a>
+      <a target="_blank" rel="noopener" href="https://www.google.com/search?tbm=isch&q=glute+drive+machine">🖼 Imagem</a>
+    </div>
+  </div>
+
+  <div class="section-title">🟨 Bíceps</div>
+
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-name"><span class="ex-num">8</span> Rosca Direta (Halter ou Barra W)</div>
+      <span class="tag livre">Livre</span>
+    </div>
+    <div class="sets">3 × 10–12 reps</div>
+    <div class="desc">Em pé, cotovelos colados ao corpo. Use barra W (reduz estresse no punho) ou par de halteres simultâneos. Subida controlada, descida em 2s.</div>
+    <div class="links">
+      <a class="yt" target="_blank" rel="noopener" href="https://www.youtube.com/results?search_query=rosca+direta+barra+w+execu%C3%A7%C3%A3o">▶ Vídeo</a>
+      <a target="_blank" rel="noopener" href="https://www.google.com/search?tbm=isch&q=ez+bar+curl">🖼 Imagem</a>
+    </div>
+  </div>
+
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-name"><span class="ex-num">9</span> Rosca Martelo (Hammer)</div>
+      <span class="tag livre">Livre</span>
+    </div>
+    <div class="sets">3 × 12 reps</div>
+    <div class="desc">Halteres com pegada neutra (polegar pra cima). Foco em braquial e braquiorradial — dá grossura ao braço.</div>
+    <div class="links">
+      <a class="yt" target="_blank" rel="noopener" href="https://www.youtube.com/results?search_query=rosca+martelo+halter+execu%C3%A7%C3%A3o">▶ Vídeo</a>
+      <a target="_blank" rel="noopener" href="https://www.google.com/search?tbm=isch&q=hammer+curl+dumbbell">🖼 Imagem</a>
+    </div>
+  </div>
+
+  <div class="section-title">🟩 Panturrilha</div>
+
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-name"><span class="ex-num">10</span> Panturrilha em Pé (Máquina)</div>
+      <span class="tag maquina">Máquina</span>
+    </div>
+    <div class="sets">4 × 15 reps</div>
+    <div class="desc">Máquina de standing calf raise (com almofada nos ombros) ou no smith. Amplitude completa: estica bem embaixo, contrai forte em cima.</div>
+    <div class="links">
+      <a class="yt" target="_blank" rel="noopener" href="https://www.youtube.com/results?search_query=panturrilha+em+p%C3%A9+m%C3%A1quina">▶ Vídeo</a>
+      <a target="_blank" rel="noopener" href="https://www.google.com/search?tbm=isch&q=standing+calf+raise+machine">🖼 Imagem</a>
+    </div>
+  </div>
+
+</section>
+
+<!-- ====================== TREINO B ====================== -->
+<section id="pane-b" class="pane">
+
+  <div class="section-title">🔥 Aquecimento</div>
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-name"><span class="ex-num">0</span> Aeróbico leve</div>
+    </div>
+    <div class="sets">5–8 min</div>
+    <div class="desc">Bike ou esteira em ritmo leve.</div>
+  </div>
+
+  <div class="section-title">🟥 Peito</div>
+
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-name"><span class="ex-num">1</span> Supino Máquina (Chest Press)</div>
+      <span class="tag maquina">Máquina</span>
+    </div>
+    <div class="sets">4 × 10 reps</div>
+    <div class="desc">Máquina de supino articulada, sentado, costas apoiadas. Pegada na altura do peito. Empurra até quase estender (sem travar o cotovelo).</div>
+    <div class="links">
+      <a class="yt" target="_blank" rel="noopener" href="https://www.youtube.com/results?search_query=supino+m%C3%A1quina+chest+press+execu%C3%A7%C3%A3o">▶ Vídeo</a>
+      <a target="_blank" rel="noopener" href="https://www.google.com/search?tbm=isch&q=chest+press+machine">🖼 Imagem</a>
+    </div>
+  </div>
+
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-name"><span class="ex-num">2</span> Voador (Peck Deck)</div>
+      <span class="tag maquina">Máquina</span>
+    </div>
+    <div class="sets">3 × 12 reps</div>
+    <div class="desc">Máquina de peck deck. Sentado, antebraços nas almofadas, junta os braços à frente do peito. Isolamento de peitoral.</div>
+    <div class="links">
+      <a class="yt" target="_blank" rel="noopener" href="https://www.youtube.com/results?search_query=voador+peck+deck+execu%C3%A7%C3%A3o">▶ Vídeo</a>
+      <a target="_blank" rel="noopener" href="https://www.google.com/search?tbm=isch&q=pec+deck+machine">🖼 Imagem</a>
+    </div>
+  </div>
+
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-name"><span class="ex-num">3</span> Crossover na Polia</div>
+      <span class="tag polia">Polia</span>
+    </div>
+    <div class="sets">3 × 12 reps</div>
+    <div class="desc">Cross-over: duas polias altas, um cabo em cada mão, traz as mãos pra frente cruzando levemente. Variação alta = parte média/inferior do peito.</div>
+    <div class="links">
+      <a class="yt" target="_blank" rel="noopener" href="https://www.youtube.com/results?search_query=crossover+polia+peitoral">▶ Vídeo</a>
+      <a target="_blank" rel="noopener" href="https://www.google.com/search?tbm=isch&q=cable+crossover+chest">🖼 Imagem</a>
+    </div>
+  </div>
+
+  <div class="section-title">🟪 Quadríceps</div>
+
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-name"><span class="ex-num">4</span> Leg Press 45°</div>
+      <span class="tag maquina">Máquina</span>
+    </div>
+    <div class="sets">4 × 10–12 reps</div>
+    <div class="desc">Pés na plataforma, na largura dos ombros, ligeiramente baixos (foco quad). Desce até <strong>~90° no joelho</strong> — não force amplitude máxima ainda (preserva posterior).</div>
+    <div class="note-warn">⚠ Cuidado com amplitude excessiva — pés muito altos jogam carga no posterior. Mantenha pés centrais/baixos.</div>
+    <div class="links">
+      <a class="yt" target="_blank" rel="noopener" href="https://www.youtube.com/results?search_query=leg+press+45+graus+execu%C3%A7%C3%A3o">▶ Vídeo</a>
+      <a target="_blank" rel="noopener" href="https://www.google.com/search?tbm=isch&q=leg+press+45+machine">🖼 Imagem</a>
+    </div>
+  </div>
+
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-name"><span class="ex-num">5</span> Cadeira Extensora</div>
+      <span class="tag maquina">Máquina</span>
+    </div>
+    <div class="sets">3 × 12 reps</div>
+    <div class="desc">Isolamento puro de quadríceps. Sentado, rolo no tornozelo, estende as pernas até o topo. Segura 1s contraído.</div>
+    <div class="links">
+      <a class="yt" target="_blank" rel="noopener" href="https://www.youtube.com/results?search_query=cadeira+extensora+leg+extension">▶ Vídeo</a>
+      <a target="_blank" rel="noopener" href="https://www.google.com/search?tbm=isch&q=leg+extension+machine">🖼 Imagem</a>
+    </div>
+  </div>
+
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-name"><span class="ex-num">6</span> Cadeira Adutora</div>
+      <span class="tag maquina">Máquina</span>
+    </div>
+    <div class="sets">3 × 15 reps</div>
+    <div class="desc">Sentado, apoios nas faces internas das coxas, fecha as pernas. Trabalha adutores — estabilizadores importantes para proteger o posterior.</div>
+    <div class="links">
+      <a class="yt" target="_blank" rel="noopener" href="https://www.youtube.com/results?search_query=cadeira+adutora+execu%C3%A7%C3%A3o">▶ Vídeo</a>
+      <a target="_blank" rel="noopener" href="https://www.google.com/search?tbm=isch&q=hip+adduction+machine">🖼 Imagem</a>
+    </div>
+  </div>
+
+  <div class="section-title">🟫 Ombro</div>
+
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-name"><span class="ex-num">7</span> Desenvolvimento Máquina</div>
+      <span class="tag maquina">Máquina</span>
+    </div>
+    <div class="sets">3 × 10–12 reps</div>
+    <div class="desc">Shoulder press machine, sentado com costas apoiadas. Pegada neutra ou pronada. Empurra os pegadores acima da cabeça.</div>
+    <div class="links">
+      <a class="yt" target="_blank" rel="noopener" href="https://www.youtube.com/results?search_query=desenvolvimento+m%C3%A1quina+shoulder+press">▶ Vídeo</a>
+      <a target="_blank" rel="noopener" href="https://www.google.com/search?tbm=isch&q=shoulder+press+machine">🖼 Imagem</a>
+    </div>
+  </div>
+
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-name"><span class="ex-num">8</span> Elevação Lateral (Máquina ou Polia)</div>
+      <span class="tag maquina">Máquina</span>
+    </div>
+    <div class="sets">3 × 12–15 reps</div>
+    <div class="desc">Máquina de elevação lateral (lateral raise machine) — braços nas almofadas, abre lateralmente até a altura do ombro. Se não tiver, use polia baixa unilateral.</div>
+    <div class="links">
+      <a class="yt" target="_blank" rel="noopener" href="https://www.youtube.com/results?search_query=eleva%C3%A7%C3%A3o+lateral+m%C3%A1quina">▶ Vídeo</a>
+      <a target="_blank" rel="noopener" href="https://www.google.com/search?tbm=isch&q=lateral+raise+machine">🖼 Imagem</a>
+    </div>
+  </div>
+
+  <div class="section-title">🟨 Tríceps</div>
+
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-name"><span class="ex-num">9</span> Tríceps Testa (Halter ou Barra W)</div>
+      <span class="tag livre">Livre</span>
+    </div>
+    <div class="sets">3 × 10–12 reps</div>
+    <div class="desc">Deitado no banco, halteres ou barra W. Cotovelos apontados pra cima, desce o peso até a testa, estende. <strong>Cotovelo fixo</strong>.</div>
+    <div class="links">
+      <a class="yt" target="_blank" rel="noopener" href="https://www.youtube.com/results?search_query=tr%C3%ADceps+testa+halter+skull+crusher">▶ Vídeo</a>
+      <a target="_blank" rel="noopener" href="https://www.google.com/search?tbm=isch&q=skull+crusher+exercise">🖼 Imagem</a>
+    </div>
+  </div>
+
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-name"><span class="ex-num">10</span> Tríceps Corda (Polia)</div>
+      <span class="tag polia">Polia</span>
+    </div>
+    <div class="sets">3 × 12–15 reps</div>
+    <div class="desc">Polia alta com corda. Em pé, cotovelos colados ao corpo, abre a corda na parte de baixo. Finalizador.</div>
+    <div class="links">
+      <a class="yt" target="_blank" rel="noopener" href="https://www.youtube.com/results?search_query=tr%C3%ADceps+corda+polia+pushdown">▶ Vídeo</a>
+      <a target="_blank" rel="noopener" href="https://www.google.com/search?tbm=isch&q=triceps+rope+pushdown">🖼 Imagem</a>
+    </div>
+  </div>
+
+  <div class="section-title">🟩 Panturrilha</div>
+
+  <div class="ex">
+    <div class="ex-head">
+      <div class="ex-name"><span class="ex-num">11</span> Panturrilha Sentado</div>
+      <span class="tag maquina">Máquina</span>
+    </div>
+    <div class="sets">4 × 15 reps</div>
+    <div class="desc">Máquina seated calf raise — almofada sobre os joelhos, ponta dos pés na plataforma. Trabalha o sóleo (camada profunda).</div>
+    <div class="links">
+      <a class="yt" target="_blank" rel="noopener" href="https://www.youtube.com/results?search_query=panturrilha+sentado+seated+calf+raise">▶ Vídeo</a>
+      <a target="_blank" rel="noopener" href="https://www.google.com/search?tbm=isch&q=seated+calf+raise+machine">🖼 Imagem</a>
+    </div>
+  </div>
+
+</section>
+
+<footer>
+  Registre os pesos e datas em <code>registro-treino.xlsx</code> — uma linha por série feita.
+</footer>
+
+<script>
+  document.querySelectorAll('.tabs button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const pane = btn.dataset.pane;
+      document.querySelectorAll('.tabs button').forEach(b => b.classList.toggle('active', b === btn));
+      document.querySelectorAll('.pane').forEach(p => p.classList.toggle('active', p.id === 'pane-' + pane));
+      window.scrollTo({top: 0, behavior: 'smooth'});
+    });
+  });
+</script>
+
+</body>
+</html>
